@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="new_blog">
+    <h1>New blog</h1>
+  </div>
+  <div class="form-horizontal">
+    <%= form_with model: @blog, local: true do |form| %>
+
+    <% if @blog.errors.any? %>
+      <div id="error_explanation " class="alert-danger alert-dismissible">
+        <h2>
+          <%= pluralize(@blog.errors.count, "error") %>
+          prohibited this blog from being saved:
+        </h2>
+        <ul>
+          <% @blog.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="new_blog form-group">
+      <div class="mb-3">
+        <%= form.label :title , :class=>"form-label"%>
+        <%= form.text_field :title ,:class=>"input_title form-control",:placeholder=>"Enter the Title" ,:id=>"focusedInput"%>
+      </div>
+      <div class="mb-3">
+        <%= form.label :description, :class=>"form-label" %><br>
+        <%= form.text_area :description ,:class=>"input_title form-control",:placeholder=>"Enter contents"%>
+      </div>
+      <div class="mb-3">
+        <%= form.label :image, :class=>"form-label" %><br>
+        <%= form.file_field :image ,:id => "image_field" , :class => 'form-control'%>
+      </div>
+      <div>
+        <%= form.submit "Submit Blog",:class=>"btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+  <div class="mb-3">
+    <%= link_to 'Back', blogs_path , class: 'link-dark'%>
+  </div>
+</div>

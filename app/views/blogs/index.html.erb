@@ -1,0 +1,15 @@
+ <% if can? :create, Blog %>
+    <div class='container text-end'><%= link_to 'Add New Blog', new_blog_path ,:class=>"link-secondary"%></div>
+<% end %>
+<% @blogs.each do |blog| %>
+    <div class='container'>
+        <div class='blog-title shadow-sm p-3 mb-5 bg-body rounded'>
+            <%= link_to blog.title, blog_path(blog) ,:class=>"nav-link"%>
+            <div class='fw-lighter fst-italic text-muted container-md'><%=truncate(blog.description, :length => 150, :omission => '... (continued)').html_safe%></div>
+        </div>
+    </div>
+<% end %>
+
+<div class='container'>
+    <%= will_paginate @blogs %>
+</div>

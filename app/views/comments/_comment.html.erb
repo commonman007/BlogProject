@@ -1,0 +1,5 @@
+<p class='text-break secondary'>
+    <span class="fw-light"><%= comment.message %></span>
+    <span class='fw-lighter fst-italic text-muted'><%= comment.user.name %></span>
+    <span class='fw-lighter fst-italic text-muted'><%= comment.created_at.to_datetime.strftime('%Y %h %d %H:%m') %></span>
+ </p>   

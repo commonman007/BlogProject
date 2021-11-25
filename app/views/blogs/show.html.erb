@@ -1,0 +1,36 @@
+<%= content_for(:head_attributes) do %>data-blog-id="<%= @blog.id %>"<% end %>
+<div class='container'>
+    <div class='card text-dark bg-light'>
+        <div class='card-header'>
+            <% if can? :edit, @blog %>
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item ">
+                        <%= link_to 'Edit', edit_blog_path(@blog) ,:class=>"nav-link"%>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to 'Delete', blog_path(@blog) ,method: :delete, data: { confirm: 'Are you sure?' } ,:class=>"nav-link"%>
+                    </li>
+                </ul>
+            <% end %>
+            <div class='h4 text-center align-middle'><%= @blog.title %></div>
+        </div>
+        <div class='card-body'>
+            <%= @blog.description.html_safe %>
+        </div>
+        <% if @blog.image.attachment.present? %>
+            <div class='image-section'>
+                <%= image_tag @blog.image, :class => 'rounded mx-auto d-block' %>
+            </div>
+        <% end %>
+    </div>
+    <%= hidden_field_tag :blog_id, @blog.id %>
+    <div class='comment-section card border-secondary'>
+        <% if @blog.comments.any? %>
+            <div class="card-header">Comments</div>
+            <div class="comments-list card-body" id="comments_<%=@blog.id%>">
+                <%= render partial: 'comments/comment', collection: @blog.comments.preload(:user) %>
+            </div>
+        <% end %>
+    </div>
+    <%= render partial: 'comments/comments_form', locals: {comment: Comment.new(), blog: @blog}%>
+</div>
