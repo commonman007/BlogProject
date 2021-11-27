@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  # redirecting to signup or saving user_id into cookies
   def authorize
     current_user
     if current_user.nil?

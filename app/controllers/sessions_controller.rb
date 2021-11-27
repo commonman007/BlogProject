@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  # log outing the current_user
+  # logouts the current_user
   def destroy
     session[:user_id] = nil
     redirect_to root_url, flash: { info: 'Logged Out' }
